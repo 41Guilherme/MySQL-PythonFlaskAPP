@@ -67,6 +67,25 @@ class Query():
             cursor.close()
             return True
     
-        return None
+        return False
+    
+    def updateEspecificItem(self, id : int, name : str, age : int):
+        if self.con.is_connected:
+            cursor = self.con.cursor()
+            cursor.execute(f""" UPDATE teste 
+                        SET Name = "{name}", Idade = {age} 
+                        WHERE idTeste = {id}""")
+            self.con.commit()
+            cursor.close()
+            return True
+        return False
     
 DB = Query(host,db,user,passw)
+
+if __name__ == "__main__":
+    
+    x = DB.getAllData()
+    print(x)
+    DB.updateEspecificItem(1,"Guilherme", 21)
+    x = DB.getAllData()
+    print(x)
