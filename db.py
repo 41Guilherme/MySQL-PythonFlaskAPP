@@ -80,12 +80,27 @@ class Query():
             return True
         return False
     
+    def testClass(self):
+        aux = self.getAllData()
+        print(aux)
+        
+        self.insertItem(100, "TESTE",100)
+        aux = self.getEspecificPerson("TESTE")
+        print(aux)
+        
+        self.updateEspecificItem(100, "TESTE2",50)
+        aux = self.getAllData()
+        print(aux)
+        
+        self.deleteEspecificItem(100)
+        aux = self.getAllData()
+        print(aux)
+    
 DB = Query(host,db,user,passw)
 
 if __name__ == "__main__":
     
-    x = DB.getAllData()
-    print(x)
-    DB.updateEspecificItem(1,"Guilherme", 21)
-    x = DB.getAllData()
-    print(x)
+    DB.testClass()
+    
+    
+    
