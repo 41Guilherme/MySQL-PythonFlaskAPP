@@ -4,10 +4,10 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('auth.ini')
 
-host = config['auth']['host']
-db   = config['auth']['db']
-user = config['auth']['user']
-passw= config['auth']['passw']
+host  = config['auth']['host']
+db    = config['auth']['db']
+user  = config['auth']['user']
+passw = config['auth']['passw']
 
 class Query():
     
