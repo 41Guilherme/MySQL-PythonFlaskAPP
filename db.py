@@ -23,6 +23,9 @@ class Query():
             cursor.execute(f"INSERT INTO teste(idTeste, Name, Idade) VALUES({id},'{name}',{idade})")
             self.con.commit()
             cursor.close()
+            return True
+        else:
+            return False
     
     def getAllData(self):
         if self.con.is_connected():
@@ -38,19 +41,31 @@ class Query():
                 
             cursor.close()
             return data
+        else:
+            return None
         
     def getEspecificPerson(self, name : str):
-        data = self.getAllData()
-        for item in data:
-            if name in item:
-                return item 
+        if self.con.is_connected():
+            cursor = self.con.cursor()
+            cursor.execute(f""" SELECT * FROM teste WHERE Name = "{name}" """)
+            data = []
+            for item in cursor:
+                data.append({
+                    "id"  : item[0],
+                    "name": item[1],
+                    "age" : item[2]
+                })
+            cursor.close()
+            return data[0]
         return None
     
     def deleteEspecificItem(self, id : int):
-        cursor = self.con.cursor()
-        cursor.execute(f"DELETE FROM teste WHERE idTeste = {id}")
-        self.con.commit()
-        cursor.close()
+        if self.con.is_connected:
+            cursor = self.con.cursor()
+            cursor.execute(f"DELETE FROM teste WHERE idTeste = {id}")
+            self.con.commit()
+            cursor.close()
+            return True
     
         return None
     
