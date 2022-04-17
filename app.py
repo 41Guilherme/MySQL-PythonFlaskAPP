@@ -30,6 +30,12 @@ def send_user():
     
     return jsonify(New), 201
     
+@app.route('/delete/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    DB.deleteEspecificItem(id)
+    data = DB.getAllData()
+    response = {"result" : data}
+    return jsonify(response), 201
     
 if __name__ == "__main__":
     app.run(debug=True)
