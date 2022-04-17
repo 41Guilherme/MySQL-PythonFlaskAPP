@@ -1,8 +1,12 @@
-from flask import Flask, jsonify, request 
+from flask import Flask, jsonify, request ,render_template
 from db import DB
 
 app = Flask(__name__)
 
+@app.route('/help', methods=['GET'])
+def help():
+    return render_template("index.html")
+    
 @app.route('/data', methods=['GET'])
 def get_data():
     data = DB.getAllData()
