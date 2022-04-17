@@ -37,6 +37,14 @@ def delete_user(id):
     response = {"result" : data}
     return jsonify(response), 201
     
+@app.route('/update/<int:id>', methods=['PUT'])
+def update_user(id):
+    New = request.get_json()
+    DB.updateEspecificItem(id, New['nome'], New['idade'])
+    response = DB.getEspecificPerson(str(New['nome']))
+    return  response , 200
+
+
 if __name__ == "__main__":
     app.run(debug=True)
   
